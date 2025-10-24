@@ -1,0 +1,42 @@
+- key: about
+  label: "概要"
+  label_en: "About"
+  url: "/"
+  url_en: "/en/"
+
+- key: activities
+  label: "活動"
+  label_en: "Activities"
+  url: "/activities/"
+  url_en: "/en/activities/"
+
+- key: research
+  label: "研究"
+  label_en: "Research"
+  url: "/research/"
+  url_en: "/en/research/"
+
+- key: events
+  label: "イベント"
+  label_en: "Events"
+  url: "/events/"
+  url_en: "/en/events/"
+
+- key: news
+  label: "ニュース"
+  label_en: "News"
+  url: "/news/"
+  url_en: "/en/news/"
+
+- key: partners
+  label: "パートナー"
+  label_en: "Partners"
+  url: "/partners/"
+  url_en: "/en/partners/"
+
+- key: contact
+  label: "お問い合わせ"
+  label_en: "Contact"
+  url: "/contact/"
+  url_en: "/en/contact/"
+  cta: true
