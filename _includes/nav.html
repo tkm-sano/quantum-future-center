@@ -1,0 +1,83 @@
+{%- assign theme_key = include.theme_key -%}
+{%- if theme_key == nil or theme_key == "" -%}{%- assign theme_key = page.theme -%}{%- endif -%}
+{%- if theme_key == nil or theme_key == "" -%}{%- assign theme_key = "center" -%}{%- endif -%}
+
+{%- assign nav_data_key = "nav_" | append: theme_key -%}
+{%- assign nav = site.data[nav_data_key] -%}
+
+{%- assign lang = page.lang -%}
+{%- if lang == nil -%}{%- assign lang = site.lang -%}{%- endif -%}
+{%- if lang == "" -%}{%- assign lang = "ja" -%}{%- endif -%}
+
+{%- assign to_en = "/en/" -%}
+{%- assign to_ja = "/" -%}
+{%- if page.link_en -%}{%- assign to_en = page.link_en | relative_url -%}{%- endif -%}
+{%- if page.slug_en -%}{%- assign to_en = "/en/" | append: page.slug_en | append: "/" | relative_url -%}{%- endif -%}
+{%- if page.link -%}{%- assign to_ja = page.link | relative_url -%}{%- endif -%}
+{%- if page.slug -%}{%- assign to_ja = "/" | append: page.slug | append: "/" | relative_url -%}{%- endif -%}
+
+{%- assign current_url = page.url -%}
+{%- if current_url == nil -%}{%- assign current_url = "" -%}{%- endif -%}
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-nav" role="banner">
+  <div class="nav-wrap">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Center Home">
+      {%- if site.logo -%}
+        <img src="{{ site.logo | relative_url }}" alt="" width="28" height="28" />
+      {%- endif -%}
+      <span class="brand-text">{{ site.title }}</span>
+    </a>
+
+    <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
+      <span class="menu-label">Menu</span>
+    </button>
+
+    <nav id="nav-links" class="links" aria-label="Primary">
+      <ul>
+        {%- for item in nav -%}
+          {%- assign item_url = item.url -%}
+          {%- if lang == "en" and item.url_en -%}{%- assign item_url = item.url_en -%}{%- endif -%}
+
+          {%- assign active = "" -%}
+          {%- if current_url == item_url -%}{%- assign active = " is-active" -%}{%- endif -%}
+          {%- if active == "" and current_url contains item_url and item.key != "about" -%}{%- assign active = " is-active" -%}{%- endif -%}
+
+          {%- assign label = item.label -%}
+          {%- if lang == "en" and item.label_en -%}{%- assign label = item.label_en -%}{%- endif -%}
+
+          {%- assign classes = "nav-link" | append: active -%}
+          {%- if item.cta -%}{%- assign classes = classes | append: " cta" -%}{%- endif -%}
+
+          <li>
+            <a class="{{ classes }}" href="{{ item_url | relative_url }}">
+              <span>{{ label }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <div class="lang">
+        {%- if lang == "en" -%}
+          <a class="lang-btn" href="{{ to_ja }}">JP</a>
+        {%- else -%}
+          <a class="lang-btn" href="{{ to_en }}">EN</a>
+        {%- endif -%}
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  (function(){
+    var btn = document.querySelector('.menu-toggle');
+    var nav = document.getElementById('nav-links');
+    if(!btn || !nav){ return; }
+    btn.addEventListener('click', function(){
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      nav.classList.toggle('open');
+      document.documentElement.classList.toggle('nav-open');
+    });
+  }());
+</script>
