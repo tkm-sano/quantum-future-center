@@ -1,0 +1,63 @@
+# ===============================
+# Jekyll Build / Cache
+# ===============================
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock
+
+# ===============================
+# OS / Editor files
+# ===============================
+.DS_Store
+Thumbs.db
+*.swp
+*.bak
+*.tmp
+*.log
+
+# ===============================
+# Node / Frontend build (if used)
+# ===============================
+node_modules/
+package-lock.json
+yarn.lock
+
+# ===============================
+# Build / Deploy Artifacts
+# ===============================
+public/
+dist/
+tmp/
+coverage/
+vendor/
+
+# ===============================
+# VSCode / IDE
+# ===============================
+.vscode/
+.idea/
+*.code-workspace
+
+# ===============================
+# Backup / Local configs
+# ===============================
+*.orig
+*.old
+*.save
+*.backup
+.env
+.env.local
+.env.production
+.env.development
+
+# ===============================
+# GitHub Pages & CI/CD
+# ===============================
+# 念のためActions生成物を除外
+*.zip
+*.tar.gz
+.cache/
+# Pages用デプロイブランチがある場合
+gh-pages/
