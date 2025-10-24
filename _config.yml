@@ -1,0 +1,30 @@
+title: "量子未来社会デザイン研究センター"
+lang: "ja"
+theme: center
+permalink: pretty
+timezone: Asia/Tokyo
+
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude:
+  - README.md
+  - node_modules
+  - vendor
+  - Gemfile*
+  - package*.json
+
+# --- i18n defaults (JP as site default, EN for /en/*) ---
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      lang: "ja"        # site-wide default language
+      layout: "default" # ensure a layout is set even if a page forgets it
+      theme: center
+  - scope:
+      path: "en"
+      type: "pages"
+    values:
+      lang: "en"        # any page under /en/ automatically becomes English
