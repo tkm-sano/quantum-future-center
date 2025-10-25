@@ -1,10 +1,10 @@
 ---
-title: "Events"
+title: "CONTRIBUTION"
 layout: default
 theme: center
 lang: en
-link: /events/
+link: /contribution/
 ---
 
-# Events
+# CONTRIBUTION
 Upcoming and past events.

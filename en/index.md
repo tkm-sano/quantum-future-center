@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "ABOUT"
 layout: default
 theme: center
 lang: en

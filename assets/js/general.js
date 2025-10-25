@@ -25,7 +25,8 @@
     var st = doc.createElement('style');
     st.id = styleId;
     st.textContent = [
-      '.particle-field{position:fixed;inset:0;z-index:0;pointer-events:none;}',
+      '.particle-field{position:fixed;inset:0;z-index:-1;pointer-events:none;}',
+      '.nav-open .particle-field{opacity:0;}',
       'header.site-nav, main, footer.site-footer{position:relative;z-index:1;}',
       'body > .container{position:relative;z-index:1;}'
     ].join('\n');

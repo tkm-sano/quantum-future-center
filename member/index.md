@@ -1,9 +1,9 @@
 ---
-title: "NEWS"
+title: "MEMBER"
 layout: default
 theme: center
 lang: ja
-link_en: /en/news/
+link_en: /en/member/
 ---
 
-# NEWS
+# MEMBER

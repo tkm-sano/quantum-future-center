@@ -1,42 +1,42 @@
 - key: about
-  label: "概要"
-  label_en: "About"
+  label: "ABOUT"
+  label_en: "ABOUT"
   url: "/"
   url_en: "/en/"
 
-- key: activities
-  label: "活動"
-  label_en: "Activities"
-  url: "/activities/"
-  url_en: "/en/activities/"
-
-- key: research
-  label: "研究"
-  label_en: "Research"
-  url: "/research/"
-  url_en: "/en/research/"
-
-- key: events
-  label: "イベント"
-  label_en: "Events"
-  url: "/events/"
-  url_en: "/en/events/"
+- key: member
+  label: "MEMBER"
+  label_en: "MEMBER"
+  url: "/member/"
+  url_en: "/en/member/"
 
 - key: news
-  label: "ニュース"
-  label_en: "News"
+  label: "NEWS"
+  label_en: "NEWS"
   url: "/news/"
   url_en: "/en/news/"
 
-- key: partners
-  label: "パートナー"
-  label_en: "Partners"
-  url: "/partners/"
-  url_en: "/en/partners/"
+- key: contribution
+  label: "CONTRIBUTION"
+  label_en: "CONTRIBUTION"
+  url: "/contribution/"
+  url_en: "/en/contribution/"
+
+- key: publication
+  label: "PUBLICATION"
+  label_en: "PUBLICATION"
+  url: "/publication/"
+  url_en: "/en/publication/"
+
+- key: partner
+  label: "PARTNER"
+  label_en: "PARTNER"
+  url: "/partner/"
+  url_en: "/en/partner/"
 
 - key: contact
-  label: "お問い合わせ"
-  label_en: "Contact"
+  label: "CONTACT"
+  label_en: "CONTACT"
   url: "/contact/"
   url_en: "/en/contact/"
   cta: true

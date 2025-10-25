@@ -1,10 +1,10 @@
 ---
-title: "Partners"
+title: "PARTNER"
 layout: default
 theme: center
 lang: en
-link: /partners/
+link: /partner/
 ---
 
-# Partners
+# PARTNER
 Affiliations and collaborators.

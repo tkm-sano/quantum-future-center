@@ -1,12 +1,12 @@
 ---
-title: "Contact"
+title: "CONTACT"
 layout: default
 theme: center
 lang: en
 link: /contact/
 ---
 
-# Contact
+# CONTACT
 For collaborations and inquiries:
 
 - Email: info@example.org (placeholder)

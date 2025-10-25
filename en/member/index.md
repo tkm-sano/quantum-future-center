@@ -1,10 +1,10 @@
 ---
-title: "Activities"
+title: "MEMBER"
 layout: default
 theme: center
 lang: en
-link: /activities/
+link: /member/
 ---
 
-# Activities
+# MEMBER
 Program categories and case studies go here.

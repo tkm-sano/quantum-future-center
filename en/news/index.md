@@ -1,5 +1,5 @@
 ---
-title: "News"
+title: "NEWS"
 layout: default
 theme: center
 lang: en
