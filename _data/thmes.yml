@@ -1,0 +1,6 @@
+center:
+  bg: "#000000"
+  surface: "rgba(0,0,0,0.8)"
+  ink: "#ffffff"
+  primary: "#ffffff"
+  secondary: "#b3c0ff"

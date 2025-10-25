@@ -27,28 +27,19 @@
 {%- assign current_url = page.url -%}
 {%- if current_url == nil -%}{%- assign current_url = "" -%}{%- endif -%}
 
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-nav" role="banner">
-  <div class="nav-wrap">
-    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Center Home">
-      {%- if site.logo -%}
-        <img src="{{ site.logo | relative_url }}" alt="" width="28" height="28" />
-      {%- endif -%}
-      <span class="brand-text">{{ site.title }}</span>
-    </a>
+<div class="nav-controls">
+  <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
+    <span class="menu-label">Menu</span>
+  </button>
 
-    <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links">
-      <span class="menu-label">Menu</span>
-    </button>
+  <nav id="nav-links" class="links" aria-label="Primary">
+    <ul>
+      {%- assign _nav = nav -%}
+      {%- assign _nav_is_empty = false -%}
+      {%- if _nav == nil or _nav == empty -%}{%- assign _nav_is_empty = true -%}{%- endif -%}
 
-    <nav id="nav-links" class="links" aria-label="Primary">
-      <ul>
-        {%- assign _nav = nav -%}
-        {%- assign _nav_is_empty = false -%}
-        {%- if _nav == nil or _nav == empty -%}{%- assign _nav_is_empty = true -%}{%- endif -%}
-
-        {%- if _nav_is_empty -%}
-          {%- capture _fallback -%}
+      {%- if _nav_is_empty -%}
+        {%- capture _fallback -%}
 about|ABOUT|/|ABOUT|/en/
 member|MEMBER|/member/|MEMBER|/en/member/
 news|NEWS|/news/|NEWS|/en/news/
@@ -56,265 +47,174 @@ contribution|CONTRIBUTION|/contribution/|CONTRIBUTION|/en/contribution/
 publication|PUBLICATION|/publication/|PUBLICATION|/en/publication/
 partner|PARTNER|/partner/|PARTNER|/en/partner/
 contact|CONTACT|/contact/|CONTACT|/en/contact/
-          {%- endcapture -%}
-          {%- assign _lines = _fallback | split: "\n" -%}
-          {%- for _line in _lines -%}
-            {%- assign _line = _line | strip -%}
-            {%- if _line == "" -%}{%- continue -%}{%- endif -%}
-            {%- assign p = _line | split: "|" -%}
-            {%- assign _key = p[0] -%}
-            {%- assign _label = p[1] -%}
-            {%- assign _url = p[2] -%}
-            {%- assign _label_en = p[3] -%}
-            {%- assign _url_en = p[4] -%}
-            {%- assign item_url = _url -%}
-            {%- assign label = _label -%}
-            {%- if lang == "en" -%}{%- assign item_url = _url_en -%}{%- assign label = _label_en -%}{%- endif -%}
+        {%- endcapture -%}
+        {%- assign _lines = _fallback | split: "\n" -%}
+        {%- for _line in _lines -%}
+          {%- assign _line = _line | strip -%}
+          {%- if _line == "" -%}{%- continue -%}{%- endif -%}
+          {%- assign p = _line | split: "|" -%}
+          {%- assign _key = p[0] -%}
+          {%- assign _label = p[1] -%}
+          {%- assign _url = p[2] -%}
+          {%- assign _label_en = p[3] -%}
+          {%- assign _url_en = p[4] -%}
+          {%- assign item_url = _url -%}
+          {%- assign label = _label -%}
+          {%- if lang == "en" -%}{%- assign item_url = _url_en -%}{%- assign label = _label_en -%}{%- endif -%}
 
-            {%- assign active = "" -%}
-            {%- if current_url == item_url -%}{%- assign active = " is-active" -%}{%- endif -%}
-            {%- if active == "" and current_url contains item_url and _key != "about" -%}{%- assign active = " is-active" -%}{%- endif -%}
+          {%- assign active = "" -%}
+          {%- if current_url == item_url -%}{%- assign active = " is-active" -%}{%- endif -%}
+          {%- if active == "" and current_url contains item_url and _key != "about" -%}{%- assign active = " is-active" -%}{%- endif -%}
 
-            {%- assign classes = "nav-link" | append: active -%}
-            <li>
-              <a class="{{ classes }}" href="{{ item_url | relative_url }}"><span>{{ label }}</span></a>
-            </li>
-          {%- endfor -%}
-        {%- else -%}
-          {%- for item in _nav -%}
-            {%- assign item_url = item.url -%}
-            {%- if lang == "en" and item.url_en -%}{%- assign item_url = item.url_en -%}{%- endif -%}
-            {%- if item_url == nil -%}{%- assign item_url = "" -%}{%- endif -%}
-            {%- if item_url contains "#" -%}{%- continue -%}{%- endif -%}
-            {%- assign first_char = item_url | slice: 0, 1 -%}
-            {%- if first_char == "#" -%}{%- continue -%}{%- endif -%}
-
-            {%- assign active = "" -%}
-            {%- if current_url == item_url -%}{%- assign active = " is-active" -%}{%- endif -%}
-            {%- if active == "" and current_url contains item_url and item.key != "about" -%}{%- assign active = " is-active" -%}{%- endif -%}
-
-            {%- assign label = item.label -%}
-            {%- if lang == "en" and item.label_en -%}{%- assign label = item.label_en -%}{%- endif -%}
-
-            {%- assign classes = "nav-link" | append: active -%}
-            <li>
-              <a class="{{ classes }}" href="{{ item_url | relative_url }}">
-                <span>{{ label }}</span>
-              </a>
-            </li>
-          {%- endfor -%}
-        {%- endif -%}
-
-          <li class="lang-switch">
-            {% if lang == "en" %}
-              <a class="nav-link" href="{{ to_ja }}"><span>JP</span></a>
-            {% else %}
-              <a class="nav-link" href="{{ to_en }}"><span>EN</span></a>
-            {% endif %}
+          {%- assign classes = "nav-link" | append: active -%}
+          <li>
+            <a class="{{ classes }}" href="{{ item_url | relative_url }}"><span>{{ label }}</span></a>
           </li>
-      </ul>
-    </nav>
-    <div class="nav-backdrop" hidden></div>
-  </div>
-</header>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for item in _nav -%}
+          {%- assign item_url = item.url -%}
+          {%- if lang == "en" and item.url_en -%}{%- assign item_url = item.url_en -%}{%- endif -%}
+          {%- if item_url == nil -%}{%- assign item_url = "" -%}{%- endif -%}
+          {%- if item_url contains "#" -%}{%- continue -%}{%- endif -%}
+          {%- assign first_char = item_url | slice: 0, 1 -%}
+          {%- if first_char == "#" -%}{%- continue -%}{%- endif -%}
+
+          {%- assign active = "" -%}
+          {%- if current_url == item_url -%}{%- assign active = " is-active" -%}{%- endif -%}
+          {%- if active == "" and current_url contains item_url and item.key != "about" -%}{%- assign active = " is-active" -%}{%- endif -%}
+
+          {%- assign label = item.label -%}
+          {%- if lang == "en" and item.label_en -%}{%- assign label = item.label_en -%}{%- endif -%}
+
+          {%- assign classes = "nav-link" | append: active -%}
+          <li>
+            <a class="{{ classes }}" href="{{ item_url | relative_url }}">
+              <span>{{ label }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+
+        <li class="lang-switch">
+          {% if lang == "en" %}
+            <a class="nav-link" href="{{ to_ja }}"><span>JP</span></a>
+          {% else %}
+            <a class="nav-link" href="{{ to_en }}"><span>EN</span></a>
+          {% endif %}
+        </li>
+    </ul>
+  </nav>
+  <div class="nav-backdrop" hidden></div>
+</div>
 
 <style>
-  .nav-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:10;pointer-events:none}
-  /* Ensure backdrop only shows when nav is open */
-  .nav-open .nav-backdrop{display:block}
+  .nav-backdrop{
+    position: fixed !important;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+    backdrop-filter: blur(2px);
+    z-index: 2147483646 !important;
+    pointer-events: none;
+  }
+  /* Ensure backdrop only shows when nav is open and always on top */
+  .nav-open .nav-backdrop{
+    display: block;
+    z-index: 2147483646 !important;
+    pointer-events: auto;
+  }
   .nav-backdrop[hidden]{display:none}
 
   /* Top-right menu panel (mobile/overlay) */
-  #nav-links{
-    position:fixed; right: max(16px, env(safe-area-inset-right)); left:auto;
-    max-height: calc(100vh - 24px); overflow: auto; overscroll-behavior: contain;
-    padding:.7rem .9rem; padding-bottom: max(.7rem, env(safe-area-inset-bottom));
-    width:min(240px,72vw); box-shadow:0 14px 40px rgba(0,0,0,.35);
-    pointer-events:auto; background:#fff; border:2px solid #000; border-radius:12px; color:#000;
-    display:none;
+  #nav-links {
+    flex: 1 1 auto;              /* occupy remaining space */
+    display: flex;
+    justify-content: flex-end;   /* push items to the right */
+    position: fixed !important;
+    top: 0;
+    right: max(16px, env(safe-area-inset-right));
+    left: auto;
+    width: min(240px, 72vw);
+    height: auto;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.7rem 0.9rem;
+    padding-bottom: max(0.7rem, env(safe-area-inset-bottom));
+    box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    pointer-events: auto;
+    background: var(--surface);
+    border: 2px solid #000;
+    border-radius: 12px;
+    color: var(--ink);
+    display: none;
+    z-index: 2147483647 !important;
+    /* Make nav-links a flex container to allow ul to fill height */
+    flex-direction: column;
+  }
+  /* Always keep nav-links on top and visible when open */
+  .nav-open #nav-links {
+    z-index: 2147483647 !important;
+    display: block;
+    top: 0;
+    right: max(16px, env(safe-area-inset-right));
+    left: auto;
+    position: fixed !important;
   }
   #nav-links a{position:relative; z-index:2}
   #nav-links.open{display:block}
-  #nav-links ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.25rem}
+  #nav-links ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:.25rem;
+    /* Make ul scrollable if content is too tall */
+    overflow-y: auto;
+    max-height: calc(100vh - 24px - 1.4rem); /* nav max-height minus nav padding */
+  }
   #nav-links.open ul{align-items:flex-end;text-align:right}
   #nav-links.open li{text-align:right}
   #nav-links.open .nav-link{display:inline-block;text-align:right;width:auto}
   #nav-links li{margin:0}
-  #nav-links .nav-link{color:#000; border:1px solid rgba(0,0,0,.14); border-radius:10px; padding:.55rem .75rem; background:transparent}
-  #nav-links .nav-link:hover{background:rgba(0,0,0,.06); border-color:rgba(0,0,0,.3)}
-  #nav-links .nav-link.is-active{border-color:rgba(0,0,0,.45)}
-  /* Ensure panel sits above backdrop */
-  .nav-open #nav-links{z-index:9999; display:block}
-  #nav-links{ top:auto; } /* top is set dynamically by JS to sit below header */
+  #nav-links .nav-link{
+    color: var(--ink);
+    border:1px solid rgba(0,0,0,.14);
+    border-radius:10px;
+    padding:.55rem .75rem;
+    background:transparent;
+    transition: background-color .2s ease, border-color .2s ease, transform .15s ease;
+  }
+  #nav-links .nav-link:hover{
+    background: rgba(0,0,0,.10);
+    border-color: rgba(0,0,0,.35);
+    transform: translateY(-1px);
+  }
+  /* Overlay: slightly stronger hover contrast */
+  .nav-open #nav-links .nav-link:hover{
+    background: color-mix(in srgb, #ffffff 14%, transparent);
+    border-color: color-mix(in srgb, #ffffff 40%, transparent);
+  }
 
   /* Desktop: inline nav (no overlay) */
   @media (min-width: 960px){
     .menu-toggle{display:none}
     /* Desktop: show inline nav, not overlay */
-    #nav-links{position:static; top:auto; right:auto; left:auto; display:block; background:transparent; color:inherit; border:0; border-radius:0; padding:0; width:auto; box-shadow:none}
+    #nav-links{ position:static; top:auto; right:auto; left:auto; display:block; background:transparent; color:inherit; border:0; border-radius:0; padding:0; width:auto; box-shadow:none; flex: 1 1 auto; }
     #nav-links ul{display:flex; flex-direction:row; gap:.5rem}
     #nav-links .nav-link{color:var(--ink); border:1px solid transparent; border-radius:10px; padding:.45rem .65rem}
-    #nav-links .nav-link:hover{background:color-mix(in srgb, #ffffff 8%, transparent); border-color:transparent}
+    #nav-links .nav-link:hover{
+      background: color-mix(in srgb, #ffffff 12%, transparent);
+      border-color: transparent;
+      transform: translateY(-1px);
+    }
     #nav-links .nav-link.is-active{border-color:transparent}
   }
 
   /* Keep menu button always clickable */
   .menu-toggle{position:relative; z-index:10000}
+  @media (max-width: 959px){
+    #nav-links{ margin-left: 0; padding-left: 0; }
+  }
 </style>
-
-<script>
-  (function(){
-    var btn = document.querySelector('.menu-toggle');
-    var nav = document.getElementById('nav-links');
-    var html = document.documentElement;
-    var backdrop = document.querySelector('.nav-backdrop');
-    if(!btn || !nav){ return; }
-
-    function positionPanel(){
-      var header = document.querySelector('header.site-nav');
-      var rect = header ? header.getBoundingClientRect() : { bottom: 56 };
-      var vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-      // position:fixed uses viewport coordinates; do not add scrollY
-      var top = Math.max(8, rect.bottom + 8); // header bottom + 8px
-      nav.style.top = top + 'px';
-      nav.style.right = '16px';
-      nav.style.left = 'auto';
-      // Clamp panel height so it never overflows viewport
-      var maxH = Math.max(100, vh - top - 8);
-      nav.style.maxHeight = maxH + 'px';
-    }
-
-    var previouslyFocused = null;
-    var focusableSel = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-    function onKeydown(e){
-      if (e.key === 'Escape'){
-        e.preventDefault();
-        closeMenu();
-        return;
-      }
-      if (e.key === 'Tab'){
-        var focusable = Array.prototype.slice.call(nav.querySelectorAll(focusableSel))
-          .filter(function(el){ return el.offsetParent !== null; });
-        if (!focusable.length) return;
-        var first = focusable[0];
-        var last = focusable[focusable.length - 1];
-        if (e.shiftKey && document.activeElement === first){
-          e.preventDefault(); last.focus();
-        } else if (!e.shiftKey && document.activeElement === last){
-          e.preventDefault(); first.focus();
-        }
-      }
-    }
-
-    function openMenu(){
-      previouslyFocused = document.activeElement;
-      btn.setAttribute('aria-expanded','true');
-      nav.classList.add('open');
-      nav.style.display = 'block';
-      positionPanel();
-      html.classList.add('nav-open');
-      if (backdrop) backdrop.hidden = false;
-      nav.setAttribute('aria-hidden','false');
-      // focus first link
-      var first = nav.querySelector(focusableSel);
-      if (first) first.focus();
-      // bind esc and tab trap
-      document.addEventListener('keydown', onKeydown, true);
-    }
-
-    function closeMenu(){
-      btn.setAttribute('aria-expanded','false');
-      nav.classList.remove('open');
-      nav.style.display = '';
-      html.classList.remove('nav-open');
-      if (backdrop) backdrop.hidden = true;
-      nav.setAttribute('aria-hidden','true');
-      nav.style.top = '';
-      nav.style.maxHeight = '';
-      document.removeEventListener('keydown', onKeydown, true);
-      if (previouslyFocused && previouslyFocused.focus) previouslyFocused.focus();
-    }
-
-    btn.addEventListener('click', function(){
-      var expanded = btn.getAttribute('aria-expanded') === 'true';
-      if (expanded) { closeMenu(); } else { openMenu(); }
-    });
-
-    // Click in menu: support same-page hash jumps, then close
-    nav.addEventListener('click', function(e){
-      var a = e.target.closest('a');
-      if (!a) return;
-      var href = a.getAttribute('href') || '';
-
-      // Hash-only links (e.g., #programs)
-      if (href.charAt(0) === '#'){
-        e.preventDefault();
-        jumpToHash(href);
-        setTimeout(closeMenu, 0);
-        return;
-      }
-
-      // Same-page links that include a hash (e.g., '/#programs')
-      if (href.indexOf('#') > 0){
-        try{
-          var loc = window.location;
-          var u = new URL(href, loc.href);
-          if (u.pathname === loc.pathname && u.hash){
-            e.preventDefault();
-            jumpToHash(u.hash);
-            setTimeout(closeMenu, 0);
-            return;
-          }
-        }catch(err){}
-      }
-
-      // Normal navigation: let default proceed, then close menu
-      setTimeout(closeMenu, 0);
-    });
-
-    function jumpToHash(hash){
-      var id = hash.replace(/^#/, '');
-      var target = document.getElementById(id) || document.querySelector(hash);
-      if (!target) return;
-
-      // If the target is a <details>, open it (or open any closed ancestor <details>)
-      if (target.tagName && target.tagName.toLowerCase() === 'details'){
-        target.open = true;
-      }
-      var parentDetails = target.closest('details:not([open])');
-      if (parentDetails) parentDetails.open = true;
-
-      // Account for fixed header height
-      var header = document.querySelector('header.site-nav');
-      var offset = (header && header.getBoundingClientRect().height) || 0;
-      var y = target.getBoundingClientRect().top + window.pageYOffset - offset - 8;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-
-      // Update URL and move focus accessibly
-      history.pushState(null, '', '#' + id);
-      target.setAttribute('tabindex','-1');
-      target.focus({ preventScroll:true });
-    }
-
-    // Reset state on resize to desktop
-    var mql = window.matchMedia('(min-width: 960px)');
-    mql.addEventListener('change', function(ev){
-      if (ev.matches){ // desktop
-        closeMenu();
-      }
-    });
-
-    // Keep panel aligned while open
-    window.addEventListener('resize', function(){
-      if (nav.classList.contains('open')) positionPanel();
-    }, { passive: true });
-
-    window.addEventListener('scroll', function(){
-      if (nav.classList.contains('open')) positionPanel();
-    }, { passive: true });
-
-    // Initialize aria-hidden
-    nav.setAttribute('aria-hidden','true');
-  }());
-</script>
