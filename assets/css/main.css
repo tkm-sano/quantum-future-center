@@ -127,7 +127,7 @@ header.site-nav li,
   top: max(12px, env(safe-area-inset-top));
   right: max(12px, env(safe-area-inset-right));
   left: auto !important;
-  width: min(250px, 88vw);
+  width: min(200px, 88vw);
   max-height: calc(100vh - max(24px, env(safe-area-inset-top)) - max(24px, env(safe-area-inset-bottom)));
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

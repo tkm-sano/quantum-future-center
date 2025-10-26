@@ -16,18 +16,18 @@
   url: "/news/"
   url_en: "/en/news/"
 
-- key: contribution
-  label: "CONTRIBUTION"
-  label_en: "CONTRIBUTION"
-  url: "/contribution/"
-  url_en: "/en/contribution/"
-
 - key: publication
   label: "PUBLICATION"
   label_en: "PUBLICATION"
   url: "/publication/"
   url_en: "/en/publication/"
 
+- key: contribution
+  label: "CONTRIBUTION"
+  label_en: "CONTRIBUTION"
+  url: "/contribution/"
+  url_en: "/en/contribution/"
+  
 - key: partner
   label: "PARTNER"
   label_en: "PARTNER"
